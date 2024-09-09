@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ProductList } from '@/components/products';
+import { Cart, ProductList } from './components';
+
 </script>
 
 <template>
@@ -7,7 +8,10 @@ import { ProductList } from '@/components/products';
       <header>
             <h1>Kata E-commerce</h1>
         </header>
-      <ProductList id="product-list"/>
+        <div class="content-wrapper">
+            <ProductList id="product-list"/>
+            <Cart id="cart" />
+        </div>
     </div>
 </template>
 
@@ -35,5 +39,4 @@ h1 {
     grid-template-columns: 1fr 400px;
     gap: 20px;
 }
-
 </style>

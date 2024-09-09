@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { IProduct } from '@/models';
+import { useCartStore } from '@/stores';
 
+const cartStore = useCartStore();
 defineProps<{
     product: IProduct
 }>();
@@ -12,6 +14,7 @@ defineProps<{
         <img :src="product.image" :alt="product.title" />
         <h3>{{ product.title }}</h3>
         <p>$ {{ product.price.toFixed(2) }}</p>
+        <button @click="cartStore.addProductToCart(product)" class="add-to-cart-btn">Add to Cart</button>
     </div>
 </template>
 
