@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useProductStore } from '@/stores/ProductStore';
-import Product from '../../components/products/Product.vue';
+import { useProductStore } from '@/stores';
+import Product from './Product.vue';
+import SearchBar from './SearchBar.vue';
 import { onMounted } from 'vue';
 
 const productStore = useProductStore()
@@ -12,11 +13,15 @@ onMounted(async () => {
 
 <template>
     <div class="product-list">
+        <SearchBar />
         <div v-if="productStore.isLoading" class="loading-spinner">
             <div class="spinner"></div>
         </div>
+        <div v-else-if="productStore.filteredProducts.length === 0" class="no-products">
+            No products found. Please try a different search.
+        </div>
         <div v-else class="products">
-            <div v-for="product in productStore.products" :key="product.id" class="product">
+            <div v-for="product in productStore.filteredProducts" :key="product.id" class="product">
                 <Product :product="product"/>
             </div>
         </div>
@@ -24,6 +29,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.no-products {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: #666;
+}
 .product-list {
     flex: 4;
     position: relative;

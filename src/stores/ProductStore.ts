@@ -5,7 +5,7 @@ interface ProductState {
     products: IProduct[];
     error: Error | null;
     filter: string;
-    isLoading: boolean; // Add this line
+    isLoading: boolean;
 }
 
 const STORE_NAME = 'product'
@@ -13,11 +13,19 @@ const STORE_NAME = 'product'
 export const useProductStore = defineStore(STORE_NAME, {
 
     state: (): ProductState => ({
-        products: [],
+        products: [], 
         error: null,
         filter: '',
-        isLoading: false, // Add this line
+        isLoading: false,
     }),
+
+    getters: {
+        filteredProducts(): IProduct[] {
+            return this.products.filter(product =>
+                product.title.toLowerCase().includes(this.filter.toLowerCase())
+            )
+        },
+    },
 
     actions: {
         async load() {
@@ -35,8 +43,9 @@ export const useProductStore = defineStore(STORE_NAME, {
                 this.isLoading = false; // Set to false when done, regardless of success or failure
             }
         },
-
-        // ... other actions ...
+        setSearchQuery(query: string) {
+            this.filter = query
+        },
     },
 })
 

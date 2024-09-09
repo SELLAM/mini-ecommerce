@@ -7,10 +7,10 @@ import { Cart, ProductList } from './components';
   <div class="container">
       <input type="checkbox" id="cart-toggle" class="cart-toggle">
       <header>
-          <h1>Kata E-commerce</h1>
+          <h1>Mini E-commerce</h1>
           <label for="cart-toggle" class="cart-toggle-btn">
               <span class="show-cart-text">Show Cart</span>
-              <span class="hide-cart-text">< Back to Products</span>
+              <span class="hide-cart-text">< Back</span>
           </label>
       </header>
       <div class="content-wrapper">
