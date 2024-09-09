@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IProduct } from '@/models';
 import { useCartStore } from '@/stores';
+import StarRating from './StarRating.vue';
 
 const cartStore = useCartStore();
 defineProps<{
@@ -11,15 +12,34 @@ defineProps<{
 
 <template>
     <div class="product">
+        <div class="category">{{ product?.category }}</div>
         <img :src="product.image" :alt="product.title" />
         <h3>{{ product.title }}</h3>
-        <p>$ {{ product.price.toFixed(2) }}</p>
+        <StarRating :rating="product.rating?.rate" :count="product.rating?.count" />
+        <p>$ {{ product.price.toFixed(2) }} </p>
         <button @click="cartStore.addProductToCart(product)" class="add-to-cart-btn">Add to Cart</button>
     </div>
 </template>
 
 <style scoped>
+.category {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    text-transform: capitalize;
+}
+.rating-count {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
 .product {
+    position: relative;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 20px;
