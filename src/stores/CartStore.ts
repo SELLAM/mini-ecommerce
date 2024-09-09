@@ -30,7 +30,7 @@ export const useCartStore = defineStore(STORE_NAME, {
             if (existingProduct) {
                 this.incrementQuantity(existingProduct);
             } else {
-                this.cart.push({ ...product, quantity: 1 });
+                this.cart.push({ ...product, quantity: product.quantity ?? 1 });
                 this.saveCart();
             }
         },
