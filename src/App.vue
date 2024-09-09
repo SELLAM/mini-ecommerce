@@ -4,16 +4,22 @@ import { Cart, ProductList } from './components';
 </script>
 
 <template>
-    <div class="container">
+  <div class="container">
+      <input type="checkbox" id="cart-toggle" class="cart-toggle">
       <header>
-            <h1>Kata E-commerce</h1>
-        </header>
-        <div class="content-wrapper">
-            <ProductList id="product-list"/>
-            <Cart id="cart" />
-        </div>
-    </div>
+          <h1>Kata E-commerce</h1>
+          <label for="cart-toggle" class="cart-toggle-btn">
+              <span class="show-cart-text">Show Cart</span>
+              <span class="hide-cart-text">< Back to Products</span>
+          </label>
+      </header>
+      <div class="content-wrapper">
+          <ProductList id="product-list"/>
+          <Cart id="cart" />
+      </div>
+  </div>
 </template>
+
 
 <style scoped>
 .container {
@@ -38,5 +44,57 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 400px;
     gap: 20px;
+}
+
+.cart-toggle {
+    display: none;
+}
+
+.cart-toggle-btn {
+    display: none;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1001;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-toggle-btn .hide-cart-text {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .content-wrapper {
+        display: block;
+    }
+
+    .cart-toggle-btn {
+        display: inline; 
+    }
+
+    #cart{
+        display: none;
+    }
+
+    .cart-toggle:checked~.content-wrapper #product-list {
+        display: none;
+    }
+
+    .cart-toggle:checked~.content-wrapper #cart {
+        display: block;
+    }
+
+    .cart-toggle:checked~header .cart-toggle-btn .show-cart-text {
+        display: none;
+    }
+
+    .cart-toggle:checked~header .cart-toggle-btn .hide-cart-text {
+        display: inline;
+    }
 }
 </style>
